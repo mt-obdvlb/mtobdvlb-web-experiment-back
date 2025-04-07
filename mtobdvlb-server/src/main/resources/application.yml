@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://${mtobdvlb.datasource.host}:${mtobdvlb.datasource.port}/${mtobdvlb.datasource.database}}
+    driver-class-name: ${mtobdvlb.datasource.driver-class-name}
+    username: ${mtobdvlb.datasource.username}
+    password: ${mtobdvlb.datasource.password}
+
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.mtobdvlb.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      mtobdvlb:
+        mapper: debug
+        service: info
+        controller: info
+
+mtobdvlb:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    secret: itcast
+    # 设置jwt过期时间
+    ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    token-name: token
+
+
