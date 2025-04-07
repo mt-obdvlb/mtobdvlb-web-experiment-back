@@ -1,6 +1,9 @@
 package com.mtobdvlb.mapper;
 
+import com.github.pagehelper.Page;
+import com.mtobdvlb.dto.UserPageQueryDTO;
 import com.mtobdvlb.entity.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -9,4 +12,15 @@ public interface UserMapper {
 
     @Select("select * from user where username = #{username}")
     User getByUsername(String username);
+
+    @Insert("insert into user(username, password, birth_time) values(#{username}, #{password}, #{birthTime})")
+    void insert(User user);
+
+
+    void update(User user);
+
+    @Select("select * from user where id = #{id}")
+    User getById(Long id);
+
+    Page<User> pageQuery(UserPageQueryDTO userPageQueryDTO);
 }
