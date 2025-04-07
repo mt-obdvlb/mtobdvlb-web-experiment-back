@@ -8,7 +8,7 @@ spring:
     allow-circular-references: true
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://${mtobdvlb.datasource.host}:${mtobdvlb.datasource.port}/${mtobdvlb.datasource.database}}
+    url: jdbc:mysql://${mtobdvlb.datasource.host}:${mtobdvlb.datasource.port}/${mtobdvlb.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
     driver-class-name: ${mtobdvlb.datasource.driver-class-name}
     username: ${mtobdvlb.datasource.username}
     password: ${mtobdvlb.datasource.password}
