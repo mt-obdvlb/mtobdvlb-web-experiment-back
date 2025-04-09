@@ -30,7 +30,7 @@ public class WebMvcConfiguration {
         log.info("开始注册拦截器...");
         registry.addInterceptor(jwtTokenInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/user/login", "/user/add", "/user/editPassword");
+                .excludePathPatterns("/auth/**");
     }
 
     @Bean

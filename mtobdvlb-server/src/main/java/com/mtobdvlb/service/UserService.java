@@ -1,8 +1,8 @@
 package com.mtobdvlb.service;
 
 
-import com.mtobdvlb.dto.UserDTO;
-import com.mtobdvlb.dto.UserEditPasswordDTO;
+import com.mtobdvlb.dto.UserUpdateDTO;
+import com.mtobdvlb.dto.UserForgetPasswordDTO;
 import com.mtobdvlb.dto.UserLoginDTO;
 import com.mtobdvlb.dto.UserPageQueryDTO;
 import com.mtobdvlb.entity.User;
@@ -13,9 +13,9 @@ public interface UserService {
 
     void save(User user);
 
-    void update(UserDTO userDTO);
+    void update(UserUpdateDTO userUpdateDTO);
 
-    void editPassword(UserEditPasswordDTO userEditPasswordDTO);
+    void forgetPassword(UserForgetPasswordDTO userForgetPasswordDTO);
 
     User getById(Long id);
 

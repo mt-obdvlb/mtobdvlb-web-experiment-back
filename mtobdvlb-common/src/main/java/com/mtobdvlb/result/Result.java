@@ -12,13 +12,13 @@ public class Result<T> implements Serializable {
 
     public static <T> Result<T> success() {
         Result<T> result = new Result<>();
-        result.code = 1;
+        result.code = 200;
         return result;
     }
 
     public static <T> Result<T> success(T data) {
         Result<T> result = new Result<>();
-        result.code = 1;
+        result.code = 200;
         result.data = data;
         return result;
     }

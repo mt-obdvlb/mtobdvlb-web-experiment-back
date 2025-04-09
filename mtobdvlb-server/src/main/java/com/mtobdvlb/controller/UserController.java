@@ -1,8 +1,8 @@
 package com.mtobdvlb.controller;
 
 import com.mtobdvlb.constant.JwtClaimsConstant;
-import com.mtobdvlb.dto.UserDTO;
-import com.mtobdvlb.dto.UserEditPasswordDTO;
+import com.mtobdvlb.dto.UserUpdateDTO;
+import com.mtobdvlb.dto.UserForgetPasswordDTO;
 import com.mtobdvlb.dto.UserLoginDTO;
 import com.mtobdvlb.dto.UserPageQueryDTO;
 import com.mtobdvlb.entity.User;
@@ -44,6 +44,9 @@ public class UserController {
                 .id(user.getId())
                 .username(user.getUsername())
                 .token(token)
+                .avatar(user.getAvatar())
+                .email(user.getEmail())
+                .email(user.getEmail())
                 .build();
         return Result.success(userLoginVO);
     }
@@ -62,16 +65,16 @@ public class UserController {
     }
 
     @PutMapping
-    public Result update(@RequestBody UserDTO userDTO) {
-        log.info("修改用户信息：{}", userDTO);
-        userService.update(userDTO);
+    public Result update(@RequestBody UserUpdateDTO userUpdateDTO) {
+        log.info("修改用户信息：{}", userUpdateDTO);
+        userService.update(userUpdateDTO);
         return Result.success();
     }
 
-    @PutMapping("/editPassword")
-    public Result editPassword(@RequestBody UserEditPasswordDTO userEditPasswordDTO) {
-        log.info("修改用户密码：{}", userEditPasswordDTO);
-        userService.editPassword(userEditPasswordDTO);
+    @PutMapping("/forget-password")
+    public Result forgetPassword(@RequestBody UserForgetPasswordDTO userForgetPasswordDTO) {
+        log.info("修改用户密码：{}", userForgetPasswordDTO);
+        userService.forgetPassword(userForgetPasswordDTO);
         return Result.success();
     }
 

@@ -9,7 +9,9 @@
         <set>
             <if test="username != null">username = #{username},</if>
             <if test="password != null">password = #{password},</if>
-            <if test="birth_time != null">birth_time = #{birthTime}</if>
+            <if test="birth_time != null">birth_time = #{birthTime},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="avatar != null">avatar = #{avatar}</if>
         </set>
         where id = #{id}
     </update>

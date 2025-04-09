@@ -3,12 +3,13 @@ package com.mtobdvlb.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.mtobdvlb.constant.MessageConstant;
-import com.mtobdvlb.dto.UserDTO;
-import com.mtobdvlb.dto.UserEditPasswordDTO;
+import com.mtobdvlb.dto.UserUpdateDTO;
+import com.mtobdvlb.dto.UserForgetPasswordDTO;
 import com.mtobdvlb.dto.UserLoginDTO;
 import com.mtobdvlb.dto.UserPageQueryDTO;
 import com.mtobdvlb.entity.User;
 import com.mtobdvlb.exception.AccountNotFoundException;
+import com.mtobdvlb.exception.PasswordEditFailedException;
 import com.mtobdvlb.exception.PasswordErrorException;
 import com.mtobdvlb.mapper.UserMapper;
 import com.mtobdvlb.result.PageResult;
@@ -49,17 +50,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(UserDTO userDTO) {
+    public void update(UserUpdateDTO userUpdateDTO) {
         User user = new User();
-        BeanUtils.copyProperties(userDTO, user);
+        BeanUtils.copyProperties(userUpdateDTO, user);
         userMapper.update(user);
     }
 
     @Override
-    public void editPassword(UserEditPasswordDTO userEditPasswordDTO) {
-        User user = new User();
-        BeanUtils.copyProperties(userEditPasswordDTO, user);
-        user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
+    public void forgetPassword(UserForgetPasswordDTO userForgetPasswordDTO) {
+        if(!userForgetPasswordDTO.getPassword().equals(userForgetPasswordDTO.getPasswordConfirmation())) {
+            throw new PasswordEditFailedException(MessageConstant.PASSWORD_CONFIRMATION_NOT_MATCH);
+        }
+        User user = userMapper.getByUsername(userForgetPasswordDTO.getUsername());
+        if(user == null) {
+            throw new AccountNotFoundException(MessageConstant.USER_NOT_EXIST);
+        }
         userMapper.update(user);
     }
 
