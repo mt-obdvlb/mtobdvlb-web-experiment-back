@@ -46,7 +46,7 @@ public class UserController {
                 .token(token)
                 .avatar(user.getAvatar())
                 .email(user.getEmail())
-                .email(user.getEmail())
+                .birthTime(user.getBirthTime())
                 .build();
         return Result.success(userLoginVO);
     }
@@ -71,7 +71,7 @@ public class UserController {
         return Result.success();
     }
 
-    @PutMapping("/forget-password")
+    @PostMapping("/forget-password")
     public Result forgetPassword(@RequestBody UserForgetPasswordDTO userForgetPasswordDTO) {
         log.info("修改用户密码：{}", userForgetPasswordDTO);
         userService.forgetPassword(userForgetPasswordDTO);
@@ -91,6 +91,13 @@ public class UserController {
         log.info("分页查询：{}", userPageQueryDTO);
         PageResult pageResult = userService.pageQuery(userPageQueryDTO);
         return Result.success(pageResult);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Long id) {
+        log.info("根据id删除用户：{}", id);
+        userService.delete(id);
+        return Result.success();
     }
 
 }

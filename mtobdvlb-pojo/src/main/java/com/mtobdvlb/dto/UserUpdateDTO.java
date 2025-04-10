@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class UserUpdateDTO {
     private String username;
     private Long id;
-    private LocalDate birth_time;
+    private LocalDate birthTime;
     private String email;
     private String avatar;
 }

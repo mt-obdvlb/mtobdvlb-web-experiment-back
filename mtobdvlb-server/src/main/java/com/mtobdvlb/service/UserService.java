@@ -20,4 +20,6 @@ public interface UserService {
     User getById(Long id);
 
     PageResult pageQuery(UserPageQueryDTO userPageQueryDTO);
+
+    void delete(Long id);
 }

@@ -21,4 +21,7 @@ public interface UserMapper {
     User getById(Long id);
 
     Page<User> pageQuery(UserPageQueryDTO userPageQueryDTO);
+
+    @Select("delete from user where id = #{id}")
+    void delete(Long id);
 }

@@ -85,4 +85,9 @@ public class UserServiceImpl implements UserService {
         List<User> records = page.getResult();
         return new PageResult(total, records);
     }
+
+    @Override
+    public void delete(Long id) {
+        userMapper.delete(id);
+    }
 }
