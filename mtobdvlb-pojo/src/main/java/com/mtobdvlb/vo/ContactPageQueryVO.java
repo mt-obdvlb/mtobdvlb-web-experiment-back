@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -34,4 +36,5 @@ public class ContactPageQueryVO {
      * 省份
      */
     private String province;
+    private LocalDate date;
 }

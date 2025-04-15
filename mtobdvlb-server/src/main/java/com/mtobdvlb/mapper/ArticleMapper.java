@@ -1,12 +1,15 @@
 package com.mtobdvlb.mapper;
 
 import com.github.pagehelper.Page;
+import com.mtobdvlb.dto.ArticleListDTO;
 import com.mtobdvlb.entity.Article;
 import com.mtobdvlb.vo.ArticlePageQueryVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface ArticleMapper {
@@ -25,6 +28,8 @@ public interface ArticleMapper {
     @Delete("delete from article where id = #{id}")
     void delete(Long id);
 
-    @Select("select * from article")
+
     Page<ArticlePageQueryVO> pageQuery();
+
+    List<Article> list(ArticleListDTO articleListDTO);
 }

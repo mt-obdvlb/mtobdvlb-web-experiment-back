@@ -3,9 +3,11 @@ package com.mtobdvlb.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.mtobdvlb.constant.MessageConstant;
+import com.mtobdvlb.dto.ArticleListDTO;
 import com.mtobdvlb.entity.Article;
 import com.mtobdvlb.exception.ArticleException;
 import com.mtobdvlb.mapper.ArticleMapper;
+import com.mtobdvlb.mapper.UserMapper;
 import com.mtobdvlb.result.PageResult;
 import com.mtobdvlb.service.ArticleService;
 import com.mtobdvlb.vo.ArticlePageQueryVO;
@@ -19,6 +21,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleMapper articleMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public void save(Article article) {
@@ -58,5 +63,10 @@ public class ArticleServiceImpl implements ArticleService {
         long total = pageVO.getTotal();
         List<ArticlePageQueryVO> records = pageVO.getResult();
         return new PageResult(total, records);
+    }
+
+    @Override
+    public List<Article> list(ArticleListDTO articleListDTO) {
+        return articleMapper.list(articleListDTO);
     }
 }

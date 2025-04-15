@@ -16,4 +16,28 @@
         </set>
         where id = #{id}
     </update>
+    <select id="pageQuery" resultType="com.mtobdvlb.vo.ArticlePageQueryVO">
+        select
+        u.id as user_id,
+        u.username,
+        (select count(*) from article where user_id = u.id) as article_number
+        from user u
+        <where>
+            <if test="userId != null">
+                u.id = #{userId}
+            </if>
+        </where>
+    </select>
+    <select id="list" resultType="com.mtobdvlb.entity.Article">
+        select * from article
+        <where>
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+            <if test="title != null">
+                and title like concat('%', #{title}, '%')
+            </if>
+        </where>
+    </select>
+
 </mapper>

@@ -29,7 +29,7 @@
         where id = #{id}
     </update>
     <select id="pageQuery" resultType="com.mtobdvlb.vo.ContactPageQueryVO">
-        select id, name, province, city, address, postcode from contact
+        select id, name, province, city, address, postcode, date from contact
         <where>
             <if test="userId != null">
                 user_id = #{userId}

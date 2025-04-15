@@ -10,20 +10,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ArticlePageQueryVO {
-    /**
-     * 内容
-     */
-    private String content;
+
     /**
      * id
      */
-    private Long id;
-    /**
-     * 标题
-     */
-    private String title;
+    private Long userId;
+
     /**
      * 用户名
      */
     private String username;
+    private Integer articleNumber;
 }

@@ -1,13 +1,15 @@
 package com.mtobdvlb.controller;
 
+import com.mtobdvlb.dto.ArticleListDTO;
 import com.mtobdvlb.entity.Article;
 import com.mtobdvlb.result.PageResult;
 import com.mtobdvlb.result.Result;
 import com.mtobdvlb.service.ArticleService;
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -50,6 +52,13 @@ public class ArticleController {
         log.info("分页查询文章：{} {}", page, pageSize);
         PageResult pageResult = articleService.pageQuery(page, pageSize);
         return Result.success(pageResult);
+    }
+
+    @GetMapping("/list")
+    public Result<List<Article>> list(ArticleListDTO articleListDTO) {
+        log.info("查询文章：{} ", articleListDTO);
+        List<Article> articles = articleService.list(articleListDTO);
+        return Result.success(articles);
     }
 
 }
