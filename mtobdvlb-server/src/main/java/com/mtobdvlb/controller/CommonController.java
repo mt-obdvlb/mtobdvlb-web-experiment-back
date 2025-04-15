@@ -1,17 +1,18 @@
 package com.mtobdvlb.controller;
 
 import com.mtobdvlb.constant.MessageConstant;
+import com.mtobdvlb.entity.City;
+import com.mtobdvlb.entity.Province;
 import com.mtobdvlb.result.Result;
+import com.mtobdvlb.service.CommonService;
 import com.mtobdvlb.utils.AliOssUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -22,6 +23,9 @@ public class CommonController {
 
     @Autowired
     private AliOssUtil aliOssUtil;
+
+    @Autowired
+    private CommonService commonService;
 
     @PostMapping("/upload")
     public Result<String> upload(MultipartFile file) {
@@ -36,6 +40,20 @@ public class CommonController {
             log.error("文件上传失败", e);
         }
         return Result.error(MessageConstant.UPLOAD_FAILED);
+    }
+
+    @GetMapping("/provinces")
+    public Result<List<Province>> getProvinces() {
+        log.info("获取省份信息");
+        List<Province> provinces = commonService.getProvinces();
+        return Result.success(provinces);
+    }
+
+    @GetMapping("/cities/{provinceId}")
+    public Result<List<City>> getCities(@PathVariable Long provinceId) {
+        log.info("获取城市信息", provinceId);
+        List<City> cities = commonService.getCities(provinceId);
+        return Result.success(cities);
     }
 
 }
