@@ -9,4 +9,5 @@ public class MessageConstant {
     public static final String UNKNOWN_ERROR = "未知错误";
     public static final String UPLOAD_FAILED = "上传失败";
     public static final String PASSWORD_CONFIRMATION_NOT_MATCH = "两次输入的密码不一致";
+    public static final String CONTACT_NOT_EXIST = "联系人不存在";
 }

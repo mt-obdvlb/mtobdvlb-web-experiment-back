@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mtobdvlb.mapper.ContactMapper">
+
+    <update id="update">
+        update contact
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="province != null">
+                province = #{province},
+            </if>
+            <if test="city != null">
+                city = #{city},
+            </if>
+            <if test="address != null">
+                address = #{address},
+            </if>
+            <if test="postcode != null">
+                postcode = #{postcode},
+            </if>
+            <if test="date != null">
+                date = #{date},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="pageQuery" resultType="com.mtobdvlb.vo.ContactPageQueryVO">
+        select id, name, province, city, address, postcode from contact
+        <where>
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+            <if test="name != null">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>
