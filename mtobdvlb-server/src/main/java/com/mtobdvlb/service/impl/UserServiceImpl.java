@@ -11,9 +11,11 @@ import com.mtobdvlb.entity.User;
 import com.mtobdvlb.exception.AccountNotFoundException;
 import com.mtobdvlb.exception.PasswordEditFailedException;
 import com.mtobdvlb.exception.PasswordErrorException;
+import com.mtobdvlb.mapper.ArticleMapper;
 import com.mtobdvlb.mapper.UserMapper;
 import com.mtobdvlb.result.PageResult;
 import com.mtobdvlb.service.UserService;
+import com.mtobdvlb.vo.UserLoginVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +30,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private ArticleMapper articleMapper;
+
+
     @Override
-    public User login(UserLoginDTO userLoginDTO) {
+    public UserLoginVO login(UserLoginDTO userLoginDTO) {
         String username = userLoginDTO.getUsername();
         String password = userLoginDTO.getPassword();
         User user = userMapper.getByUsername(username);
@@ -40,7 +46,14 @@ public class UserServiceImpl implements UserService {
         if(!password.equals(user.getPassword())) {
             throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
         }
-        return user;
+        return UserLoginVO.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .avatar(user.getAvatar())
+                .email(user.getEmail())
+                .birthTime(user.getBirthTime())
+                .articleNumber(articleMapper.getArticleNumberByUserId(user.getId()))
+                .build();
     }
 
     @Override
@@ -90,4 +103,7 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         userMapper.delete(id);
     }
+
+
+
 }

@@ -18,4 +18,6 @@ public class UserLoginVO {
     private String avatar;
     private String email;
     private LocalDate birthTime;
+    private Integer articleNumber;
+
 }

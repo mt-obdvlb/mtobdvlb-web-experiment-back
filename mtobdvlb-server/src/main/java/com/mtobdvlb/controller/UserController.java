@@ -32,22 +32,15 @@ public class UserController {
     @PostMapping("/login")
     public Result<UserLoginVO> login(@RequestBody UserLoginDTO userLoginDTO) {
         log.info("用户登录，用户名：{}", userLoginDTO.getUsername());
-        User user = userService.login(userLoginDTO);
+        UserLoginVO userLoginVO = userService.login(userLoginDTO);
         Map<String, Object> claims = new HashMap<>();
-        claims.put(JwtClaimsConstant.USER_ID, user.getId());
+        claims.put(JwtClaimsConstant.USER_ID, userLoginVO.getId());
         String token = JwtUtils.createJWT(
                 jwtProperties.getSecret(),
                 jwtProperties.getTtl(),
                 claims
         );
-        UserLoginVO userLoginVO = UserLoginVO.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .token(token)
-                .avatar(user.getAvatar())
-                .email(user.getEmail())
-                .birthTime(user.getBirthTime())
-                .build();
+        userLoginVO.setToken(token);
         return Result.success(userLoginVO);
     }
 

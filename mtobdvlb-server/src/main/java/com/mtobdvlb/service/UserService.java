@@ -7,9 +7,10 @@ import com.mtobdvlb.dto.UserLoginDTO;
 import com.mtobdvlb.dto.UserPageQueryDTO;
 import com.mtobdvlb.entity.User;
 import com.mtobdvlb.result.PageResult;
+import com.mtobdvlb.vo.UserLoginVO;
 
 public interface UserService {
-    User login(UserLoginDTO userLoginDTO);
+    UserLoginVO login(UserLoginDTO userLoginDTO);
 
     void save(User user);
 
